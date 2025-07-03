@@ -1,0 +1,81 @@
+#main-menu {
+  background: var(--c2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  padding-left: 3%;
+  padding-right: 3%;
+  box-shadow: 0 12px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+#main-menu .active span {
+  color: var(--a2);
+  text-decoration: underline;
+}
+
+#main-menu span:hover {
+  color: var(--a1);
+  text-decoration: underline;
+}
+
+#main-menu span {
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--c1);
+}
+
+#main-menu .center span {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+#main-menu .center .first {
+  border-left: none;
+}
+
+#main-menu .left {
+  display: flex;
+  align-items: center;
+}
+
+#main-menu .left img {
+  width: 50px;
+  height: auto;
+}
+
+#main-menu .center {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+#main-menu .right {
+  margin-left: auto;
+}
+
+#main-menu .right span.separator {
+  text-decoration: none;
+  color: var(--c1);
+  cursor: default;
+}
+
+#main-menu .right .user-info {
+  display: flex;
+  align-items: normal;
+  gap: 20px;
+}
+
+#main-menu .right .user-info .logout {
+  cursor: pointer;
+}
+#main-menu .right .user-info img {
+  width: 30px;
+  height: auto;
+}
+
+#main-menu .right .user-info img:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
