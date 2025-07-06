@@ -5,7 +5,10 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --c1: #212121;
+  --a1: #6e1d72;
+  --a2: #e600e6;
+  --f1: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,4 +18,5 @@
 
 body {
   margin: 0;
+  background-color: #4b4949 !important;
 }

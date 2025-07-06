@@ -6,6 +6,7 @@ export const GameProvider = ({ children }) => {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameSessionId, setGameSessionId] = useState(null);
   const [gameWordLenght, setGameWordLenght] = useState(0);
+  const url = "https://word-api-hmlg.vercel.app/api";
 
   useEffect(() => {}, []);
 
