@@ -24,8 +24,9 @@ export const GameProvider = ({ children }) => {
   const getGameSession = async (difficultyId) => {
     try {
       const res = await axios.get(`${url}/difficulties/${difficultyId}`);
-      setGameSessionId(res.sessionId);
-      setGameWordLenght(res.wordLenght);
+      setGameSessionId(res.data.sessionId);
+      console.log(res.data);
+      setGameWordLenght(res.data.wordLenght);
       setGameStarted(true);
     } catch (error) {
       handleError(error);
@@ -45,6 +46,7 @@ export const GameProvider = ({ children }) => {
     <GameContext.Provider
       value={{
         gameStarted,
+        gameWordLenght,
         getDiffilcuties,
         getGameSession,
         postCheckWord,

@@ -1,0 +1,19 @@
+.game-word {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.game-word .letter-box {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--c2);
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--f1);
+  background-color: transparent;
+}
