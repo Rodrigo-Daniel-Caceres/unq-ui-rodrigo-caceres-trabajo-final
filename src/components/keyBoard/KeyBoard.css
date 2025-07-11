@@ -1,0 +1,13 @@
+.key-board {
+  background-color: var(--c1);
+  color: var(--f1);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+  margin-top: 2%;
+  display: flex;
+}

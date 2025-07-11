@@ -4,14 +4,15 @@ import "./GameBoard.css";
 import GameWord from "./word/GameWord";
 
 const GameBoard = () => {
-  const { gameWordLenght } = useContext(GameContext);
-  const attempts = Array.from({ length: 6 });
+  const { maxAttempts } = useContext(GameContext);
 
   return (
     <div className="game-board">
-      {attempts.map((index) => (
-        <GameWord wordLenght={gameWordLenght} key={index} />
-      ))}
+      {Array(maxAttempts)
+        .fill()
+        .map((_, i) => (
+          <GameWord wordIndex={i} key={i} />
+        ))}
     </div>
   );
 };

@@ -1,0 +1,36 @@
+.letter-box {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--c2);
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--f1);
+  background-color: transparent;
+  transition: 0.2s ease-in-out;
+}
+
+.letter-box.selected {
+  border-color: var(--a1);
+}
+
+.letter-box.correct {
+  background-color: green;
+  border-color: green;
+  color: white;
+}
+
+.letter-box.elsewhere {
+  background-color: goldenrod;
+  border-color: goldenrod;
+  color: white;
+}
+
+.letter-box.absent {
+  background-color: #444;
+  border-color: #444;
+  color: white;
+}
