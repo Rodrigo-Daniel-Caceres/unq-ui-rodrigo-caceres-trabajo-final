@@ -1,5 +1,5 @@
 #main-menu {
-  background: var(--c1);
+  background: var(--container);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,7 +12,7 @@
 #main-menu span {
   font-weight: 600;
   font-size: 1.3rem;
-  color: var(--f1);
+  color: var(--font);
 }
 
 #main-menu .left img {
@@ -23,35 +23,9 @@
 #main-menu .center {
   display: flex;
   flex: 1;
-  align-items: center;
   justify-content: center;
 }
 
 #main-menu .right {
   margin-left: auto;
-}
-
-#main-menu .right span.separator {
-  text-decoration: none;
-  color: var(--c1);
-  cursor: default;
-}
-
-#main-menu .right .user-info {
-  display: flex;
-  align-items: normal;
-  gap: 20px;
-}
-
-#main-menu .right .user-info .logout {
-  cursor: pointer;
-}
-#main-menu .right .user-info img {
-  width: 30px;
-  height: auto;
-}
-
-#main-menu .right .user-info img:hover {
-  cursor: pointer;
-  opacity: 0.8;
 }

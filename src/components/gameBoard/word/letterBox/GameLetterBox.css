@@ -18,19 +18,13 @@
 }
 
 .letter-box.correct {
-  background-color: green;
-  border-color: green;
-  color: white;
+  background-color: var(--correct);
 }
 
 .letter-box.elsewhere {
-  background-color: goldenrod;
-  border-color: goldenrod;
-  color: white;
+  background-color: var(--elsewere);
 }
 
 .letter-box.absent {
-  background-color: #444;
-  border-color: #444;
-  color: white;
+  background-color: var(--absent);
 }

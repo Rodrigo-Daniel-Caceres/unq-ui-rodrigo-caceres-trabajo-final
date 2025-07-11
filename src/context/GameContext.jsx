@@ -1,97 +1,85 @@
 import { createContext, useState } from "react";
 import axios from "axios";
-export const GameContext = createContext({});
+export const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameSessionId, setGameSessionId] = useState(null);
   const [gameWordLenght, setGameWordLenght] = useState(0);
-  const [currentWord, setCurrentWord] = useState(0);
-  const [maxAttempts, setMaxAttempts] = useState(6);
+  const [currentAttemptIndex, setCurrentAttemptIndex] = useState(0);
+  const [maxAttempts] = useState(6);
   const [gameWords, setGameWords] = useState([]);
+  const [usedKeys, setUsedKeys] = useState({}); // nuevo
+
   const url = "https://word-api-hmlg.vercel.app/api";
 
-  const handleError = (error) => {};
-
-  const startNewGame = (session) => {
-    setGameSessionId(session.sessionId);
-    setGameWordLenght(session.wordLenght);
-    setCurrentWord(0);
-    setGameWords(Array(6).fill(null));
-    setGameStarted(true);
+  const handleError = (err) => {
+    console.error(err);
+    alert("Error en la comunicación con la API");
   };
 
   const getDiffilcuties = async () => {
-    try {
-      const res = await axios.get(`${url}/difficulties`);
-      return res.data;
-    } catch (error) {
-      handleError(error);
-    }
+    const res = await axios.get(`${url}/difficulties`);
+    return res.data;
   };
 
   const getGameSession = async (difficultyId) => {
     try {
       const res = await axios.get(`${url}/difficulties/${difficultyId}`);
-      startNewGame(res.data);
-    } catch (error) {
-      handleError(error);
+      setGameSessionId(res.data.sessionId);
+      setGameWordLenght(res.data.wordLenght);
+      setGameStarted(true);
+      setCurrentAttemptIndex(0);
+      setGameWords(Array(6).fill(null));
+      setUsedKeys({});
+    } catch (err) {
+      handleError(err);
     }
   };
 
-  const postCheckWord = async (word) => {
-    try {
-      const res = await axios.post(`${url}/checkWord`, {
-        sessionId: gameSessionId,
-        word,
-      });
+  const postCheckWord = async (sessionId, word) => {
+    const res = await axios.post(`${url}/checkWord`, { sessionId, word });
+    return res.data;
+  };
 
-      const result = res.data; // array de { letter, solution }
+  const registerAttempt = (letters, results) => {
+    const newList = [...gameWords];
+    newList[currentAttemptIndex] = { letters, results };
+    setGameWords(newList);
+    setCurrentAttemptIndex((prev) => prev + 1);
+    updateUsedKeys(results);
+  };
 
-      setGameWords((prev) => {
-        const updated = [...prev];
-        updated[currentWord] = result;
-        return updated;
-      });
-
-      // Verificar si ganó
-      const didWin = result.every((r) => r.solution === "correct");
-
-      if (didWin) {
-        // Ganó
-        console.log("¡Ganaste!");
-        // Podés setear un estado tipo setGameEnded(true)
-      } else if (currentWord + 1 >= maxAttempts) {
-        // Perdiste
-        console.log("Perdiste 😢");
-      } else {
-        // Avanzar intento
-        setCurrentWord((prev) => prev + 1);
+  const updateUsedKeys = (results) => {
+    const updated = { ...usedKeys };
+    results.forEach(({ letter, solution }) => {
+      const current = updated[letter];
+      if (
+        solution === "correct" ||
+        (solution === "elsewhere" && current !== "correct")
+      ) {
+        updated[letter] = solution;
+      } else if (!current) {
+        updated[letter] = solution;
       }
-
-      return result;
-    } catch (error) {
-      if (error.response?.status === 400) {
-        alert("Palabra inválida. Intenta con otra.");
-      } else if (error.response?.status === 404) {
-        alert("Sesión no válida. Reiniciá el juego.");
-      } else {
-        handleError(error);
-      }
-    }
+    });
+    setUsedKeys(updated);
   };
 
   return (
     <GameContext.Provider
       value={{
         gameStarted,
+        gameSessionId,
         gameWordLenght,
+        currentAttemptIndex,
         maxAttempts,
-        currentWord,
         gameWords,
+        usedKeys,
         getDiffilcuties,
         getGameSession,
         postCheckWord,
+        registerAttempt,
       }}
     >
       {children}
