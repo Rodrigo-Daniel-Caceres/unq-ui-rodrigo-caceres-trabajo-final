@@ -9,7 +9,7 @@ export const GameProvider = ({ children }) => {
   const [currentAttemptIndex, setCurrentAttemptIndex] = useState(0);
   const [maxAttempts] = useState(6);
   const [gameWords, setGameWords] = useState([]);
-  const [usedKeys, setUsedKeys] = useState({}); // nuevo
+  const [usedKeys, setUsedKeys] = useState({});
 
   const url = "https://word-api-hmlg.vercel.app/api";
 

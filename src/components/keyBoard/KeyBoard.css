@@ -30,12 +30,22 @@
   transition: background-color 0.2s ease-in-out;
 }
 
+.keyboard .key:hover {
+  background-color: var(--hover);
+}
+
 .key.correct {
   background-color: var(--correct);
-  color: white;
+}
+
+.key.correct:hover {
+  background-color: var(--correct);
 }
 
 .key.absent {
   background-color: var(--absent);
-  color: white;
+}
+
+.key.absent:hover {
+  background-color: var(--absent);
 }

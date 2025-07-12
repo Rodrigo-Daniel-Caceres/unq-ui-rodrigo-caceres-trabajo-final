@@ -1,20 +1,24 @@
 .letter-box {
   width: 3rem;
   height: 3rem;
-  border: 2px solid var(--c2);
+  border: 2px solid var(--line);
   border-radius: 0.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   font-size: 1.5rem;
-  color: var(--f1);
+  color: var(--font);
   background-color: transparent;
   transition: 0.2s ease-in-out;
 }
 
+.letter-box:hover {
+  border: 2px solid var(--hover);
+}
+
 .letter-box.selected {
-  border-color: var(--a1);
+  border-color: var(--accent);
 }
 
 .letter-box.correct {

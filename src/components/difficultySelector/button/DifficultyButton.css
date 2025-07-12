@@ -2,7 +2,7 @@
   width: 100%;
   padding: 0.75rem 1rem;
   margin-bottom: 0.75rem;
-  background-color: var(--a1);
+  background-color: var(--line);
   color: var(--f1);
   border: none;
   border-radius: 0.5rem;
@@ -12,5 +12,5 @@
 }
 
 .difficulty-button:hover {
-  background-color: var(--a2);
+  background-color: var(--hover);
 }

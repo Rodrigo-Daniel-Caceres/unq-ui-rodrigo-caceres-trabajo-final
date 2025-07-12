@@ -5,7 +5,7 @@ import "./KeyBoard.css";
 const rows = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["a", "s", "d", "f", "g", "h", "j", "k", "l", "ñ"],
-  ["ENTER", "z", "x", "c", "v", "b", "n", "m", "BACK"],
+  ["ENTER", "z", "x", "c", "v", "b", "n", "m", "BACKSPACE"],
 ];
 
 const KeyBoard = () => {

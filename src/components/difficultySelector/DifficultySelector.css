@@ -1,6 +1,6 @@
 .difficulty-selector {
-  background-color: var(--c1);
-  color: var(--f1);
+  background-color: var(--container);
+  color: var(--font);
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GameContext } from "../../../context/GameContext";
 import GameLetterBox from "./letterBox/GameLetterBox";
 import "./GameWord.css";
@@ -12,15 +12,16 @@ const GameWord = ({ wordLenght, active, result = [], presetLetters = [] }) => {
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!active) return;
+    if (!active || submitted || loading) return;
 
     const handleKeyDown = async (e) => {
       const key = e.key.toLowerCase();
 
       if (/^[a-zñ]$/.test(key)) {
-        if (selectedIndex < wordLenght && !submitted) {
+        if (selectedIndex < wordLenght) {
           const newLetters = [...letters];
           newLetters[selectedIndex] = key;
           setLetters(newLetters);
@@ -46,11 +47,14 @@ const GameWord = ({ wordLenght, active, result = [], presetLetters = [] }) => {
       if (key === "enter") {
         if (letters.every((l) => l)) {
           try {
+            setLoading(true);
             const res = await postCheckWord(gameSessionId, letters.join(""));
             registerAttempt(letters, res);
             setSubmitted(true);
           } catch (err) {
             alert("Palabra no válida");
+          } finally {
+            setLoading(false);
           }
         }
       }
@@ -58,7 +62,7 @@ const GameWord = ({ wordLenght, active, result = [], presetLetters = [] }) => {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [letters, selectedIndex, active, submitted]);
+  }, [letters, selectedIndex, active, submitted, loading]);
 
   return (
     <div className="game-word">
@@ -68,6 +72,11 @@ const GameWord = ({ wordLenght, active, result = [], presetLetters = [] }) => {
           letter={letter}
           state={result[i]?.solution}
           selected={i === selectedIndex && active && !submitted}
+          onClick={() => {
+            if (active && !submitted && !loading) {
+              setSelectedIndex(i);
+            }
+          }}
         />
       ))}
     </div>
