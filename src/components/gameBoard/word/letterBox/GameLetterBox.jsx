@@ -1,10 +1,19 @@
 import "./GameLetterBox.css";
 
-const GameLetterBox = ({ letter, state, selected, onClick }) => {
+const GameLetterBox = ({
+  letter,
+  state,
+  selected,
+  reveal,
+  loading,
+  onClick,
+}) => {
   return (
     <div
+      className={`letter-box ${state || ""} ${selected ? "selected" : ""} ${
+        reveal ? "reveal" : ""
+      } ${loading ? "loading" : ""}`}
       onClick={onClick}
-      className={`letter-box ${state || ""} ${selected ? "selected" : ""}`}
     >
       {letter.toUpperCase()}
     </div>

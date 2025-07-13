@@ -7,11 +7,9 @@ const GameBoard = () => {
   const { gameWordLenght, maxAttempts, currentAttemptIndex, gameWords } =
     useContext(GameContext);
 
-  const rows = Array.from({ length: maxAttempts });
-
   return (
     <div className="game-board">
-      {rows.map((_, i) => (
+      {Array.from({ length: maxAttempts }).map((_, i) => (
         <GameWord
           key={i}
           wordLenght={gameWordLenght}

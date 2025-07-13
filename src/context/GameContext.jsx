@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
+
 export const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
@@ -7,20 +9,26 @@ export const GameProvider = ({ children }) => {
   const [gameSessionId, setGameSessionId] = useState(null);
   const [gameWordLenght, setGameWordLenght] = useState(0);
   const [currentAttemptIndex, setCurrentAttemptIndex] = useState(0);
-  const [maxAttempts] = useState(6);
   const [gameWords, setGameWords] = useState([]);
   const [usedKeys, setUsedKeys] = useState({});
-
+  const maxAttempts = 6;
   const url = "https://word-api-hmlg.vercel.app/api";
 
-  const handleError = (err) => {
-    console.error(err);
-    alert("Error en la comunicación con la API");
+  const handleError = (error) => {
+    if (error.response && error.response.status === 400) {
+      toast.error("La palabra no existe");
+    } else {
+      toast.error("This is an error!");
+    }
   };
 
   const getDiffilcuties = async () => {
-    const res = await axios.get(`${url}/difficulties`);
-    return res.data;
+    try {
+      const res = await axios.get(`${url}/difficulties`);
+      return res.data;
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   const getGameSession = async (difficultyId) => {
@@ -38,8 +46,12 @@ export const GameProvider = ({ children }) => {
   };
 
   const postCheckWord = async (sessionId, word) => {
-    const res = await axios.post(`${url}/checkWord`, { sessionId, word });
-    return res.data;
+    try {
+      const res = await axios.post(`${url}/checkWord`, { sessionId, word });
+      return res.data;
+    } catch (err) {
+      handleError(err);
+    }
   };
 
   const registerAttempt = (letters, results) => {

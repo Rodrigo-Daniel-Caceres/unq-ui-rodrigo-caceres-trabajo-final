@@ -17,7 +17,8 @@ const KeyBoard = () => {
   };
 
   const getKeyClass = (key) => {
-    if (usedKeys[key] === ("correct" || "elsewhere")) return "key correct";
+    if (usedKeys[key] === "correct") return "key correct";
+    if (usedKeys[key] === "elsewhere") return "key correct";
     if (usedKeys[key] === "absent") return "key absent";
     return "key";
   };

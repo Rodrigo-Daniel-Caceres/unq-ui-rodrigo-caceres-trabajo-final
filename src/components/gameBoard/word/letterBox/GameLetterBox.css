@@ -13,6 +13,41 @@
   transition: 0.2s ease-in-out;
 }
 
+.letter-box.loading {
+  animation: loading-blink 1s infinite;
+  border-color: var(--accent);
+}
+
+@keyframes loading-blink {
+  0%,
+  100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: var(--hover);
+  }
+}
+
+.letter-box.reveal {
+  animation: flip-reveal 0.6s ease forwards;
+}
+
+@keyframes flip-reveal {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(90deg);
+    background-color: var(--line);
+  }
+  51% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
 .letter-box:hover {
   border: 2px solid var(--hover);
 }
@@ -26,7 +61,7 @@
 }
 
 .letter-box.elsewhere {
-  background-color: var(--elsewere);
+  background-color: var(--elsewhere);
 }
 
 .letter-box.absent {
