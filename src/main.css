@@ -7,9 +7,10 @@
   color: rgba(255, 255, 255, 0.87);
   --container: #212121;
   --line: #424141;
+  --quit: #d12a14;
   --hover: #0b495c;
   --accent: #00aeff;
-  --correct: #48b608;
+  --correct: #3a8f09;
   --elsewhere: #c4b639;
   --absent: #837e7e;
   --font: #ffffff;

@@ -24,7 +24,7 @@ const DifficultySelector = () => {
 
   return (
     <div className="difficulty-selector">
-      <h3 className="text-center mb-3">SELECT DIFFICULTY</h3>
+      <h3 className="text-center mb-3">ELIGE LA DIFICULTAD</h3>
       {loading ? (
         <div className="d-flex justify-content-center">
           <div className="spinner-border custom-spinner" role="status" />

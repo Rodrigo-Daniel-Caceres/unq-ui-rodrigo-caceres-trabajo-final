@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { GameContext } from "../../context/GameContext";
+import { MdOutlineBackspace, MdCheck } from "react-icons/md";
 import "./KeyBoard.css";
 
 const rows = [
@@ -33,7 +34,13 @@ const KeyBoard = () => {
               className={getKeyClass(key)}
               onClick={() => handleVirtualKeyPress(key)}
             >
-              {key.toUpperCase()}
+              {key === "ENTER" ? (
+                <MdCheck />
+              ) : key === "BACKSPACE" ? (
+                <MdOutlineBackspace />
+              ) : (
+                key.toUpperCase()
+              )}
             </button>
           ))}
         </div>

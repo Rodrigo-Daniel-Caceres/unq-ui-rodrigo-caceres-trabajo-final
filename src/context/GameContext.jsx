@@ -12,14 +12,17 @@ export const GameProvider = ({ children }) => {
   const [currentAttemptIndex, setCurrentAttemptIndex] = useState(0);
   const [gameWords, setGameWords] = useState([]);
   const [usedKeys, setUsedKeys] = useState({});
-  const maxAttempts = 3;
+  const [forcedEnd, setForcedEnd] = useState(false);
+  const maxAttempts = 6;
   const url = "https://word-api-hmlg.vercel.app/api";
 
   const handleError = (error) => {
     if (error.response && error.response.status === 400) {
       toast.error("La palabra no existe");
+    } else if (error.response && error.response.status === 404) {
+      toast.error("La sesión de juego no fue encontrada");
     } else {
-      toast.error("This is an error!");
+      toast.error("Error de conexión, por favor intente más tarde");
     }
   };
 
@@ -30,6 +33,7 @@ export const GameProvider = ({ children }) => {
     setCurrentAttemptIndex(0);
     setGameWords([]);
     setUsedKeys({});
+    setForcedEnd(false);
   };
 
   const getDiffilcuties = async () => {
@@ -100,6 +104,8 @@ export const GameProvider = ({ children }) => {
         gameWords,
         usedKeys,
         gameDifficulty,
+        forcedEnd,
+        setForcedEnd,
         restartGame,
         getDiffilcuties,
         getGameSession,

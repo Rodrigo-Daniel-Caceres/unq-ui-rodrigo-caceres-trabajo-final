@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { GameContext } from "../../context/GameContext";
-import "./GameBoard.css";
 import GameWord from "./word/GameWord";
 import toast from "react-hot-toast";
-import GameModal from "../gameModal/GameModal";
+import EndModal from "../modal/EndModal";
+import "./GameBoard.css";
 
 const GameBoard = () => {
   const {
@@ -14,22 +14,24 @@ const GameBoard = () => {
     getGameSession,
     restartGame,
     gameDifficulty,
+    forcedEnd,
   } = useContext(GameContext);
   const [showModal, setShowModal] = useState(false);
   const [win, setWin] = useState(false);
 
   useEffect(() => {
     const lastResult = gameWords[currentAttemptIndex - 1]?.results;
+
     if (lastResult && lastResult.every((r) => r.solution === "correct")) {
-      toast.success("Correct");
+      toast.success("Correcto");
       setWin(true);
       setTimeout(() => setShowModal(true), 1000);
-    } else if (currentAttemptIndex === maxAttempts) {
-      toast.error("Incorrecto");
+    } else if (currentAttemptIndex === maxAttempts || forcedEnd) {
+      if (!forcedEnd) toast.error("Incorrecto");
       setWin(false);
-      setTimeout(() => setShowModal(true), 1000);
+      setTimeout(() => setShowModal(true), 500);
     }
-  }, [currentAttemptIndex]);
+  }, [currentAttemptIndex, forcedEnd]);
 
   const handleReplay = async () => {
     const dificulty = gameDifficulty;
@@ -59,7 +61,7 @@ const GameBoard = () => {
         })}
       </div>
 
-      <GameModal
+      <EndModal
         show={showModal}
         win={win}
         onReplay={handleReplay}

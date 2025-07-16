@@ -4,7 +4,7 @@
   margin-bottom: 0.75rem;
   background-color: var(--line);
   color: var(--f1);
-  border: none;
+  border: 1px solid var(--absent);
   border-radius: 0.5rem;
   font-weight: bold;
   cursor: pointer;
@@ -13,4 +13,5 @@
 
 .difficulty-button:hover {
   background-color: var(--hover);
+  border: 1px solid var(--accent);
 }

@@ -1,31 +1,55 @@
 #main-menu {
   background: var(--container);
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* centrado horizontal */
   align-items: center;
-  padding: 10px;
-  padding-left: 3%;
-  padding-right: 3%;
+  padding: 10px 3%;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-#main-menu span {
-  font-weight: 600;
-  font-size: 1.3rem;
-  color: var(--font);
-}
-
-#main-menu .left img {
-  width: 40px;
-  height: auto;
-}
-
 #main-menu .center {
-  display: flex;
-  flex: 1;
-  justify-content: center;
+  text-align: center;
+}
+
+#main-menu .left,
+#main-menu .right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#main-menu .left {
+  left: 3%;
 }
 
 #main-menu .right {
-  margin-left: auto;
+  right: 3%;
+}
+
+#main-menu span {
+  font-weight: 650;
+  font-size: 1.4rem;
+  color: var(--font);
+}
+
+.menu-button {
+  border: 1px solid var(--line);
+  color: var(--font);
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+.menu-button.quit {
+  background: var(--quit);
+  border: 1px solid var(--quit);
+}
+.menu-button.howto {
+  background: var(--correct);
+  border: 1px solid var(--correct);
+}
+.menu-button:hover {
+  background-color: var(--line);
 }
