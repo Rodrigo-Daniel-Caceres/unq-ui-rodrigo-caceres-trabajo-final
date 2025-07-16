@@ -14,12 +14,12 @@ const DifficultySelector = () => {
 
   const fetchDifficulties = async () => {
     const data = await getDiffilcuties();
-    setDifficulties(data || []);
+    setDifficulties(data);
     setLoading(false);
   };
 
-  const handleSelect = async (difficultyId) => {
-    await getGameSession(difficultyId);
+  const handleSelect = async (difficulty) => {
+    await getGameSession(difficulty);
   };
 
   return (

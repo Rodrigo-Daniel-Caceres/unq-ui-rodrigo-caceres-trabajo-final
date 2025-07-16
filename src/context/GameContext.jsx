@@ -8,10 +8,11 @@ export const GameProvider = ({ children }) => {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameSessionId, setGameSessionId] = useState(null);
   const [gameWordLenght, setGameWordLenght] = useState(0);
+  const [gameDifficulty, setGameDifficulty] = useState(0);
   const [currentAttemptIndex, setCurrentAttemptIndex] = useState(0);
   const [gameWords, setGameWords] = useState([]);
   const [usedKeys, setUsedKeys] = useState({});
-  const maxAttempts = 6;
+  const maxAttempts = 3;
   const url = "https://word-api-hmlg.vercel.app/api";
 
   const handleError = (error) => {
@@ -20,6 +21,15 @@ export const GameProvider = ({ children }) => {
     } else {
       toast.error("This is an error!");
     }
+  };
+
+  const restartGame = async () => {
+    setGameStarted(false);
+    setGameSessionId(null);
+    setGameWordLenght(0);
+    setCurrentAttemptIndex(0);
+    setGameWords([]);
+    setUsedKeys({});
   };
 
   const getDiffilcuties = async () => {
@@ -31,9 +41,10 @@ export const GameProvider = ({ children }) => {
     }
   };
 
-  const getGameSession = async (difficultyId) => {
+  const getGameSession = async (difficulty) => {
     try {
-      const res = await axios.get(`${url}/difficulties/${difficultyId}`);
+      setGameDifficulty(difficulty);
+      const res = await axios.get(`${url}/difficulties/${difficulty.id}`);
       setGameSessionId(res.data.sessionId);
       setGameWordLenght(res.data.wordLenght);
       setGameStarted(true);
@@ -88,6 +99,8 @@ export const GameProvider = ({ children }) => {
         maxAttempts,
         gameWords,
         usedKeys,
+        gameDifficulty,
+        restartGame,
         getDiffilcuties,
         getGameSession,
         postCheckWord,

@@ -48,8 +48,9 @@
   }
 }
 
-.letter-box:hover {
+.letter-box.active:hover {
   border: 2px solid var(--hover);
+  cursor: pointer;
 }
 
 .letter-box.selected {

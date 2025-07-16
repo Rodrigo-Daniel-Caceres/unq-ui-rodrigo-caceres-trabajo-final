@@ -52,6 +52,11 @@ const GameWord = ({ wordLenght, active, result = [], presetLetters = [] }) => {
       if (res) {
         registerAttempt(letters, res);
         setSubmitted(true);
+
+        const isCorrect = res.every((r) => r.solution === "correct");
+        if (isCorrect) {
+          onWin?.();
+        }
       }
       setLoading(false);
     }
@@ -79,6 +84,7 @@ const GameWord = ({ wordLenght, active, result = [], presetLetters = [] }) => {
           selected={i === selectedIndex && active && !submitted}
           reveal={!!result[i]}
           loading={loading && active && !submitted}
+          active={active && !submitted && !loading}
           onClick={() => {
             if (active && !submitted && !loading) {
               setSelectedIndex(i);
